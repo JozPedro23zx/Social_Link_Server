@@ -3,6 +3,17 @@ const User = require('../database/Models/User')
 const Posts = require('../database/Models/Posts')
 const LikeList = require('../database/Models/LikeList')
 
+
+router.get('/getPost/:postId', async (req, res) => {
+    try{
+        var data = await Posts.findByPk(req.params.postId)
+        console.log(data)
+        res.status(200).send(data)
+    }catch(error){
+        console.log(error)
+    }
+})
+
 router.get('/getUsers', async (req, res) => {
     try{
         var data = await User.findOne()
