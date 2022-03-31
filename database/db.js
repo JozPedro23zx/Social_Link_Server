@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('localDB', 'postgres', '1235', {
-    host: 'localhost',
+    host: '192.168.0.4',
     dialect: 'postgres'
 })
 
