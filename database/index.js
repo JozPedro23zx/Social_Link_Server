@@ -7,11 +7,6 @@
         const Comments = require('./Models/Comments')
 
         await database.sync()
-
-        // await LikeList.create({
-        //     idUser: "4",
-        //     likes: [1, 2]
-        // })
     }
     catch(error){
         console.log(error)
