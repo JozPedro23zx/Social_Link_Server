@@ -1,3 +1,4 @@
+require('dotenv/config')
 const express = require('express')
 const app = express()
 const router = require('./routers')
@@ -13,7 +14,7 @@ app.use(cors({
 
 app.use(router)
 
-const PORT = 8000
+PORT = process.env.PORT
 app.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
