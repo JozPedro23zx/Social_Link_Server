@@ -2,13 +2,13 @@ const Sequelize = require('sequelize')
 const database = require('../db')
 
 const Posts = database.define('posts', {
-    idPost: {
+    id_post: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    idUser: {
+    id_user: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },

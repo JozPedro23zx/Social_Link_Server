@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize')
 const database = require('../db')
 
-const LikeList = database.define('likeList', {
+const LikeList = database.define('like_list', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    idUser: {
+    id_user: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
