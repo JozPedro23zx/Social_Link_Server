@@ -12,16 +12,11 @@ const Posts = database.define('posts', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    name:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     date:{
         type: Sequelize.STRING,
         allowNull: false
     },
     likes: Sequelize.INTEGER,
-    avatar: Sequelize.STRING,
     content: Sequelize.STRING
 })
 

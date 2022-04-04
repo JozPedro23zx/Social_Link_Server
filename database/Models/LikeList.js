@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const database = require('../db')
 
 const LikeList = database.define('like_list', {
-    id: {
+    id_like: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,

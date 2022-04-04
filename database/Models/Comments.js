@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const database = require('../db')
 
 const Comments = database.define('comments', {
-    id: {
+    id_comment: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -12,8 +12,13 @@ const Comments = database.define('comments', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    id_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     comment: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
     }
 })
 
