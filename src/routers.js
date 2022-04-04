@@ -23,7 +23,7 @@ router.get('/getUsers', async (req, res) => {
 
 router.get('/getLikeList', async (req, res) => {
     try{
-        var data = await LikeList.findOne({where: {idUser: 5}})
+        var data = await LikeList.findOne({where: {id_user: 5}})
         var likes = data.likes
         res.status(200).send({likes})
     }catch(error){
