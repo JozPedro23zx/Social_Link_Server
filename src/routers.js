@@ -2,16 +2,9 @@ router = require('express').Router()
 const User = require('../database/Models/User')
 const Posts = require('../database/Models/Posts')
 const LikeList = require('../database/Models/LikeList')
+const Comments = require('../database/Models/Comments')
 
 
-router.get('/getPost/:postId', async (req, res) => {
-    try{
-        var data = await Posts.findByPk(req.params.postId)
-        res.status(200).send(data)
-    }catch(error){
-        console.log(error)
-    }
-})
 
 router.get('/getUsers', async (req, res) => {
     try{
@@ -37,6 +30,25 @@ router.get('/getAllPosts', async (req, res)=>{
         res.status(200).send({data})
     }catch(error){
         console.log(error)
+    }
+})
+
+router.get('/getPost/:postId', async (req, res) => {
+    try{
+        var data = await Posts.findByPk(req.params.postId)
+        res.status(200).send(data)
+    }catch(error){
+        console.log(error)
+    }
+})
+
+
+router.get('/getComments/:postId', async (req, res)=>{
+    try{
+        var data = await Comments.findAll({where: {id_post: req.params.postId}})
+        res.status(200).send(data)
+    }catch(err){
+        console.log(err)
     }
 })
 
