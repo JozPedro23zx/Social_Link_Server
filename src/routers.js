@@ -43,8 +43,8 @@ router.get('/getAllPosts', async (req, res)=>{
 router.post('/changeLikeList', async (req, res) =>{
     const {idUser, postId, isLike} = req.body
     try{
-        const likesData = await LikeList.findOne({where: {idUser: idUser}})
-        const postData = await Posts.findOne({where: {idPost: postId}})
+        const likesData = await LikeList.findOne({where: {id_user: idUser}})
+        const postData = await Posts.findOne({where: {id_post: postId}})
 
         if(isLike == false){
             await postData.increment('likes')
