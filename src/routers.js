@@ -6,9 +6,10 @@ const Comments = require('../database/Models/Comments')
 
 
 
-router.get('/getUsers', async (req, res) => {
+router.get('/getUser/:userId', async (req, res) => {
     try{
-        var data = await User.findOne()
+        var data = await User.findByPk(req.params.userId)
+        res.status(200).send({data})
     }catch(error){
         console.log(error)
     }
