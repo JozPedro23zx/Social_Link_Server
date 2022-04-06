@@ -46,7 +46,7 @@ router.get('/getPost/:postId', async (req, res) => {
 router.get('/getAllPostsOfUser/:userId', async (req, res)=>{
     try{
         var data = await Posts.findAll({where: {id_user: req.params.userId}})
-        res.status(200).send(data)
+        res.status(200).send({data})
     }catch(error){
         console.log(error)
     }
