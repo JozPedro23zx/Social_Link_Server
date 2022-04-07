@@ -1,4 +1,4 @@
-const LikeList = require('../database/Models/LikeList')
+const LikeList = require('../../database/Models/LikeList')
 
 class LikeListController{
     async getLikeList(req, res){

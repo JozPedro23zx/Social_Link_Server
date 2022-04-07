@@ -1,4 +1,4 @@
-const Posts = require('../database/Models/Posts')
+const Posts = require('../../database/Models/Posts')
 
 
 class PostControllers{

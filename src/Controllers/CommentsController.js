@@ -1,4 +1,4 @@
-const Comments = require('../database/Models/Comments')
+const Comments = require('../../database/Models/Comments')
 
 class CommentsController{
     async getComments(){
