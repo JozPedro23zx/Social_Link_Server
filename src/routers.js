@@ -9,7 +9,7 @@ router.get('/getPost/:postId', PostController.getPost)
 router.get('/getAllPostsOfUser/:userId', PostController.getPostOfUser)
 
 router.get('/getLikeList', LikeListController.getLikeList)
-router.post('/changeLikeList', LikeListController.getLikeList)
+router.post('/changeLikeList', LikeListController.changeLikeList)
 
 router.get('/getComments/:postId', CommentsController.getComments)
 
