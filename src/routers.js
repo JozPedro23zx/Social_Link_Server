@@ -14,6 +14,8 @@ router.post('/changeLikeList', LikeListController.changeLikeList)
 router.get('/getComments/:postId', CommentsController.getComments)
 
 router.get('/getUser/:userId', UserController.getUser)
+router.get('/getUserByName/:userId', UserController.getUserByName)
+router.post('/registerUser', UserController.registerUser)
 
 
 
