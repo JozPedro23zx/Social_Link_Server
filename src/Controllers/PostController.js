@@ -28,6 +28,27 @@ class PostControllers{
             console.log(error)
         }
     }
+
+    async createPost(req, res){
+        var contentPost = req.body.content
+        var idUser = req.body.idUser
+        var date = new Date()
+        var currentDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
+        console.log(contentPost)
+        console.log(idUser)
+        console.log(currentDate)
+        try{
+            Posts.create({
+                id_user: idUser,
+                date: currentDate,
+                likes: 0,
+                content: contentPost
+            })
+            res.send("Post created")
+        }catch(error){
+            console.log(error)
+        }
+    }
 }
 
 module.exports = new PostControllers()
