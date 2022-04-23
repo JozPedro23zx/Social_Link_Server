@@ -3,8 +3,9 @@ const Posts = require('../../database/Models/Posts')
 
 class LikeListController{
     async getLikeList(req, res){
+        console.log(req.params.userId)
         try{
-            var data = await LikeList.findOne({where: {id_user: 5}})
+            var data = await LikeList.findOne({where: {id_user: req.params.userId}})
             var likes = []
             if(data){
                 likes = data.likes

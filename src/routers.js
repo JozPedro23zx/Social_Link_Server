@@ -12,10 +12,11 @@ router.get('/getAllPostsOfUser/:userId', PostController.getPostOfUser)
 router.post('/createPost', PostController.createPost)
 
 
-router.get('/getLikeList', LikeListController.getLikeList)
+router.get('/getLikeList/:userId', LikeListController.getLikeList)
 router.post('/changeLikeList', LikeListController.changeLikeList)
 
 router.get('/getComments/:postId', CommentsController.getComments)
+router.post('/createComment', CommentsController.createComment)
 
 router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)

@@ -1,12 +1,29 @@
 const Comments = require('../../database/Models/Comments')
 
 class CommentsController{
-    async getComments(){
+    async getComments(req, res){
         try{
             var data = await Comments.findAll({where: {id_post: req.params.postId}})
             res.status(200).send(data)
         }catch(err){
             console.log(err)
+        }
+    }
+
+    async createComment(req, res){
+        const {content, idUser, idPost} = req.body
+        console.log(content)
+        console.log(idUser)
+        console.log(idPost)
+        try{
+            Comments.create({
+                id_post: idPost,
+                id_user: idUser,
+                comment: content
+            })
+            res.send("Post created")
+        }catch(err){
+            console.log(er)
         }
     }
 }
