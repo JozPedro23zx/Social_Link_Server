@@ -38,6 +38,11 @@ router.post('/login', (req, res, next) =>{
     )(req, res, next)
 })
 
+router.get('/logout', (req, res)=>{
+    req.logout()
+    res.redirect("http://localhost:3000/")
+})
+
 router.get('/user', (req, res, next) => {
     if(req.isAuthenticated()){
         res.status(200).send([req.user.id_user])
