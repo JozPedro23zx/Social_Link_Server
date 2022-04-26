@@ -18,6 +18,32 @@ class UserController{
             console.log(error)
         }
     }
+
+    async changeUserData(req, res){
+        const {username, password, passwordConfirm, avatarId} = req.body
+        const userId = req.user ? req.user.id_user : 0
+        var message
+        try{
+            var user = await User.findByPk(userId)
+            if (!user) message = "Error authentication"
+
+            let comparePassword = bcrypt.compareSync(passwordConfirm, user.password)
+            if(!comparePassword) message = "Wrong Password"
+            else{
+                message = ""
+                user.name = username == '' ? user.name : username
+                user.password = password == '' ? user.password : await bcrypt.hash(password, 10)
+                user.avatar = avatarId == '' ? user.avatar : `https://res.cloudinary.com/dhuy2dkhc/image/upload/v1649078845/${avatarId}`
+
+                await user.save()
+            } 
+            
+            res.send(message)
+
+        }catch(err){
+            console.log(err)
+        }
+    }
     
     async registerUser(req, res){
         const {username, password, passwordRepeat} = req.body

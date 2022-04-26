@@ -21,6 +21,7 @@ router.post('/createComment', CommentsController.createComment)
 router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)
 router.post('/registerUser', UserController.registerUser)
+router.post('/changeUserData', UserController.changeUserData)
 
 
 router.post('/login', (req, res, next) =>{
