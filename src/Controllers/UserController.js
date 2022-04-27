@@ -50,11 +50,11 @@ class UserController{
         var data = await User.findOne({where: {name: username}})
         var mistake = [""]
         
-        if(!username || !password || !passwordRepeat) mistake = ["Fill in all data"]
+        if(!username || !password || !passwordRepeat) mistake = ["Missing credentials"]
         else if(password !== passwordRepeat) mistake = ["Wrong passwords"]
         else if(data) mistake = ["This username has been registered"]
         else{
-        mistake = ["You has been registered in Social Link, please go to login page"]
+        mistake = [""]
             try{
                     const newUser = await User.create({
                         name: username,
