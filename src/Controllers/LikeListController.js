@@ -3,7 +3,6 @@ const Posts = require('../../database/Models/Posts')
 
 class LikeListController{
     async getLikeList(req, res){
-        console.log(req.params.userId)
         try{
             var data = await LikeList.findOne({where: {id_user: req.params.userId}})
             var likes = []
@@ -27,7 +26,6 @@ class LikeListController{
         var likesCount = []
 
         if(likesData === null){
-            console.log("a")
             let newLikeList = await LikeList.create({
                 id_user: idUser,
                 likes: [postId]
@@ -35,7 +33,6 @@ class LikeListController{
             likesCount = newLikeList.likes
         }
         else{
-            console.log("b")
 
             if(isLike == false){
                 await postData.increment('likes')

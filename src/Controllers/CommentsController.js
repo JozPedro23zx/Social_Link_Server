@@ -12,9 +12,6 @@ class CommentsController{
 
     async createComment(req, res){
         const {content, idUser, idPost} = req.body
-        console.log(content)
-        console.log(idUser)
-        console.log(idPost)
         try{
             Comments.create({
                 id_post: idPost,
