@@ -17,7 +17,8 @@ const Posts = database.define('posts', {
         allowNull: false
     },
     likes: Sequelize.INTEGER,
-    content: Sequelize.STRING
+    content: Sequelize.STRING,
+    image: Sequelize.STRING
 })
 
 module.exports = Posts
