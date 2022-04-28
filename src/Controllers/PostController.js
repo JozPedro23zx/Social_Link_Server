@@ -1,5 +1,5 @@
 const Posts = require('../../database/Models/Posts')
-
+const { Op } = require('sequelize')
 
 class PostControllers{
     async getPost(req, res){
@@ -12,8 +12,14 @@ class PostControllers{
     }
 
     async getAllPost(req, res){
+        console.log(req.params.search)
         try{
-            var data = await Posts.findAll()
+            var data
+            if(req.params.search === "empty"){
+                data = await Posts.findAll()
+            }else{
+                data = await Posts.findAll({where: {content:{[Op.like]: `%${req.params.search}%`}}})
+            }
             res.status(200).send({data})
         }catch(error){
             console.log(error)
