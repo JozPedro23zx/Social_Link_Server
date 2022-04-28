@@ -37,15 +37,17 @@ class PostControllers{
 
     async createPost(req, res){
         var contentPost = req.body.content
-        var idUser = req.body.idUser
+        var idImage = req.body.imageId
+        var user = req.user
         var date = new Date()
         var currentDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
         try{
             Posts.create({
-                id_user: idUser,
+                id_user: user.id_user,
                 date: currentDate,
                 likes: 0,
-                content: contentPost
+                content: contentPost,
+                image: idImage === '' ? idImage : `https://res.cloudinary.com/dhuy2dkhc/image/upload/v1651159775/${idImage}`
             })
             res.send("Post created")
         }catch(error){
