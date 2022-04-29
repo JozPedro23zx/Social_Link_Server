@@ -16,7 +16,7 @@ class PostControllers{
         try{
             var data
             if(req.params.search === "empty"){
-                data = await Posts.findAll()
+                data = await Posts.findAll({order: [['updatedAt', 'DESC']]})
             }else{
                 data = await Posts.findAll({where: {content:{[Op.like]: `%${req.params.search}%`}}})
             }
