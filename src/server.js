@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}))
 
 
 app.use(cors({
-    "origin": "http://localhost:3000",
+    "origin": process.env.FRONTEND,
     "methods": "GET,HEAD,POST",
     credentials: true
 }))

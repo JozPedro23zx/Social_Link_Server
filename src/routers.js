@@ -1,4 +1,5 @@
 router = require('express').Router()
+require('dotenv/config')
 const passport = require('passport');
 
 const CommentsController = require('./Controllers/CommentsController')
@@ -41,7 +42,7 @@ router.post('/login', (req, res, next) =>{
 
 router.get('/logout', (req, res)=>{
     req.logout()
-    res.redirect("http://localhost:3000/")
+    res.redirect(process.env.FRONTEND)
 })
 
 router.get('/user', (req, res, next) => {

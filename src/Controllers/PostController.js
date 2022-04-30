@@ -12,7 +12,6 @@ class PostControllers{
     }
 
     async getAllPost(req, res){
-        console.log(req.params.search)
         try{
             var data
             if(req.params.search === "empty"){
