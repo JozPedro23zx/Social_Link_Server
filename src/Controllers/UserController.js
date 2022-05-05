@@ -5,7 +5,7 @@ class UserController{
     async getUser(req, res){
         try{
             var data = await User.findByPk(req.params.userId)
-            res.status(200).send({data})
+            res.status(200).send(data)
         }catch(error){
             console.log(error)
         }

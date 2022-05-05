@@ -4,6 +4,7 @@ const passport = require('passport');
 
 const CommentsController = require('./Controllers/CommentsController')
 const LikeListController = require('./Controllers/LikeListController')
+const ChatController = require('./Controllers/ChatController')
 const PostController = require('./Controllers/PostController')
 const UserController = require('./Controllers/UserController')
 
@@ -16,13 +17,21 @@ router.post('/createPost', PostController.createPost)
 router.get('/getLikeList/:userId', LikeListController.getLikeList)
 router.post('/changeLikeList', LikeListController.changeLikeList)
 
+
 router.get('/getComments/:postId', CommentsController.getComments)
 router.post('/createComment', CommentsController.createComment)
+
 
 router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)
 router.post('/registerUser', UserController.registerUser)
 router.post('/changeUserData', UserController.changeUserData)
+
+
+router.get('/getMessage/:roomId', ChatController.getMessage)
+router.post('/sendMessage', ChatController.sendMessage)
+router.get('/getAllRooms', ChatController.getAllRooms)
+router.post('/createRoom', ChatController.createRoom)
 
 
 router.post('/login', (req, res, next) =>{
