@@ -18,7 +18,6 @@ class ChatController{
     }
 
     async createRoom(req, res){
-        console.log("Chegou aqui...")
         var status
         const {user1, user2} = req.body
         try{

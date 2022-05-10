@@ -8,9 +8,9 @@ const ChatController = require('./Controllers/ChatController')
 const PostController = require('./Controllers/PostController')
 const UserController = require('./Controllers/UserController')
 
-router.get('/getAllPosts/:search', PostController.getAllPost)
 router.get('/getPost/:postId', PostController.getPost)
 router.get('/getAllPostsOfUser/:userId', PostController.getPostOfUser)
+router.post('/getAllPosts', PostController.getAllPost)
 router.post('/createPost', PostController.createPost)
 
 

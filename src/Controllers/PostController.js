@@ -12,14 +12,15 @@ class PostControllers{
     }
 
     async getAllPost(req, res){
+        const {allIdPosts, search} = req.body
         try{
             var data
-            if(req.params.search === "empty"){
-                data = await Posts.findAll({order: [['updatedAt', 'DESC']]})
+            if(search === "empty"){
+                data = await Posts.findAll({where:{[Op.not]: {id_post: allIdPosts}}, order: [['updatedAt', 'DESC']], limit: 8 })
             }else{
-                data = await Posts.findAll({where: {content:{[Op.like]: `%${req.params.search}%`}}})
+                data = await Posts.findAll({where: {content:{[Op.like]: `%${search}%`}}})
             }
-            res.status(200).send({data})
+            res.status(200).send(data)
         }catch(error){
             console.log(error)
         }
