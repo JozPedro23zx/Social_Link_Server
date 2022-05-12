@@ -19,8 +19,6 @@ app.use(cors({
     credentials: true
 }))
 
-
-
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
@@ -38,7 +36,7 @@ const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
         origin: `${process.env.FRONTEND}`,
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
     }
 })
 
