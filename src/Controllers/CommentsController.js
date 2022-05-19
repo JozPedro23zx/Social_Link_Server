@@ -13,11 +13,13 @@ class CommentsController{
     async createComment(req, res){
         const {content, idUser, idPost} = req.body
         try{
-            Comments.create({
-                id_post: idPost,
-                id_user: idUser,
-                comment: content
-            })
+            if(content){
+                Comments.create({
+                    id_post: idPost,
+                    id_user: idUser,
+                    comment: content
+                })
+            }
             res.send("Post created")
         }catch(err){
             console.log(er)
