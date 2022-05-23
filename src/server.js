@@ -43,7 +43,7 @@ const io = new Server(server, {
 })
 
 
-io.on("connection", (socket) =>{
+io.sockets.on("connection", (socket) =>{
     console.log("User connect:", socket.id)
 
     socket.on("join_room", (data) =>{
