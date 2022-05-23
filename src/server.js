@@ -41,7 +41,6 @@ const io = new Server(server, {
     transports: ['websocket']
 })
 
-console.log(process.env.FRONTEND)
 
 io.on("connection", (socket) =>{
     console.log("User connect:", socket.id)
