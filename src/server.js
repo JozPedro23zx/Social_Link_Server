@@ -32,15 +32,15 @@ require('../authentication/auth')(passport)
 
 
 const server = http.createServer(app)
-const io = require('socket.io').listen(server)
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: `${process.env.FRONTEND}`,
-//         methods: ["GET", "POST"],
-//     },
-//     transports: ['websocket']
-// })
+
+const io = new Server(server, {
+    cors: {
+        origin: `${process.env.FRONTEND}`,
+        methods: ["GET", "POST"],
+    },
+    transports: ['websocket']
+})
 
 
 io.on("connection", (socket) =>{
