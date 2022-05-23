@@ -37,7 +37,8 @@ const io = new Server(server, {
     cors: {
         origin: `${process.env.FRONTEND}`,
         methods: ["GET", "POST"],
-    }
+    },
+    transports: ['websocket']
 })
 
 io.on("connection", (socket) =>{
