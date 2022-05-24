@@ -55,6 +55,7 @@ router.get('/logout', (req, res)=>{
 })
 
 router.get('/user', (req, res, next) => {
+    console.log(req.user)
     if(req.isAuthenticated()){
         res.status(200).send([req.user.id_user])
     }else{
