@@ -18,7 +18,7 @@ if(process.env.DATABASE_URL){
   })
 }
 else{
-  console.log("connected to the LOCAL server")
+  notice = "connected to the LOCAL server"
   sequelize = new Sequelize(process.env.DATABASE_LOCAL, {
     dialect: 'postgres'
 })
