@@ -7,6 +7,7 @@ const passport = require("passport")
 const session = require('express-session')
 const cors = require('cors')
 const http = require('http')
+const server = http.createServer(app)
 const { Server } = require('socket.io')
 
 app.use(express.json());
@@ -31,7 +32,6 @@ app.use(passport.session())
 require('../authentication/auth')(passport)
 
 
-const server = http.createServer(app)
 
 
 const io = new Server(server, {
@@ -72,6 +72,6 @@ app.use(router)
 
 PORT = process.env.PORT
 
-server.listen(PORT, error=>{
+app.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
