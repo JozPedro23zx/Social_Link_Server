@@ -72,7 +72,6 @@ app.use(router)
 
 PORT = process.env.PORT
 
-app.listen(PORT, error =>{console.log(`App ${PORT}`)})
 server.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
