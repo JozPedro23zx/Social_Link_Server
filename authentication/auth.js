@@ -8,6 +8,7 @@ module.exports = function(passport){
         passwordField: 'password'
     },
         async function(username, password, done){
+            console.log("In local strategy", username, password)
             try{
                 var user = await User.findOne({where: {name: username}})
     
@@ -25,10 +26,12 @@ module.exports = function(passport){
 
 
     passport.serializeUser(function(user, done){
+        console.log('serialize', user.name)
         done(null, user.id_user)
     })
 
     passport.deserializeUser(async function(id, done){
+        console.log('deserialize', id)
         try{
             const user = await User.findByPk(id)
             done(null, user)
