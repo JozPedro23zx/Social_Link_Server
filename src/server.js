@@ -71,6 +71,6 @@ io.on("connection", (socket) =>{
 app.use(router)
 
 PORT = process.env.PORT
-server.listen(PORT, error=>{
+app.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
