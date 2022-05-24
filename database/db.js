@@ -6,6 +6,7 @@ var notice
 
 if(process.env.DATABASE_URL){
   notice = "connected to the HEROKU server"
+  console.log("connected to the HEROKU server")
   sequelize = new Sequelize(process.env.DATABASE_URL, {
       dialect: 'postgres',
       dialectOptions: {
@@ -17,7 +18,7 @@ if(process.env.DATABASE_URL){
   })
 }
 else{
-  notice = "connected to the LOCAL server"
+  console.log("connected to the LOCAL server")
   sequelize = new Sequelize(process.env.DATABASE_LOCAL, {
     dialect: 'postgres'
 })
