@@ -8,6 +8,7 @@ const session = require('express-session')
 const cors = require('cors')
 const http = require('http')
 const server = http.createServer(app)
+const FileStore = require('session-file-store')(session)
 const { Server } = require('socket.io')
 
 app.use(express.json());
@@ -20,17 +21,18 @@ app.use(cors({
     credentials: true
 }))
 
-app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser());
 app.set('trust proxy', 1)
 app.use(session({
+    store: new FileStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     proxy: true,
-    cookie:{
-        secure: true,
-        maxAge:3600000
-    }
+    // cookie:{
+    //     secure: true,
+    //     maxAge:3600000
+    // }
 }))
 
 app.use(passport.initialize())
