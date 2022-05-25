@@ -27,12 +27,12 @@ app.use(session({
     store: new FileStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     proxy: true,
-    // cookie:{
-    //     secure: true,
-    //     maxAge:3600000
-    // }
+    cookie:{
+        secure: true,
+        maxAge:3600000
+    }
 }))
 
 app.use(passport.initialize())
