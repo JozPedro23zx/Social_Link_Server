@@ -20,7 +20,7 @@ app.use(cors({
     credentials: true
 }))
 
-app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser());
 app.enable('trust proxy');
 app.use(session({
     secret: process.env.SESSION_SECRET,
