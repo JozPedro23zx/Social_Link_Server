@@ -10,6 +10,8 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 
+app.set('trust proxy', 1)
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
@@ -21,7 +23,6 @@ app.use(cors({
 }))
 
 app.use(cookieParser());
-app.set('trust proxy', 1)
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
