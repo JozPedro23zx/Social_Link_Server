@@ -27,10 +27,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     proxy: true,
-    // cookie:{
-    //     secure: true,
-    //     maxAge:3600000
-    // }
+    cookie:{
+        secure: true,
+        maxAge:3600000
+    }
 }))
 
 app.use(passport.initialize())
