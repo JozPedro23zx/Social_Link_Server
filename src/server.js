@@ -10,7 +10,6 @@ const http = require('http')
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 
-app.set('trust proxy', 1)
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
@@ -22,6 +21,7 @@ app.use(cors({
     credentials: true
 }))
 
+app.set('trust proxy', 1)
 app.use(cookieParser());
 app.use(session({
     sotore: new (require('connect-pg-simple')(session))(),
@@ -29,10 +29,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     proxy: true,
-    cookie:{
-        secure: true,
-        maxAge:3600000
-    }
+    // cookie:{
+    //     secure: true,
+    //     maxAge:3600000
+    // }
 }))
 
 app.use(passport.initialize())
