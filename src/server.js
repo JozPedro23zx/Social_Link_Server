@@ -24,7 +24,6 @@ app.use(cors({
 app.set('trust proxy', 1)
 app.use(cookieParser());
 app.use(session({
-    sotore: new (require('connect-pg-simple')(session))(),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
