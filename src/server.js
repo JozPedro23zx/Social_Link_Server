@@ -24,6 +24,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(session({
+    sotore: new (require('connect-pg-simple')(session))(),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
