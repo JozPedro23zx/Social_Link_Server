@@ -8,7 +8,7 @@ const session = require('cookie-session')
 const cors = require('cors')
 const http = require('http')
 const server = http.createServer(app)
-const { Server } = require('socket.io')
+// const { Server } = require('socket.io')
 
 
 app.use(express.json());
@@ -23,23 +23,14 @@ app.use(cors({
 
 app.set('trust proxy', 1)
 app.use(cookieParser());
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     proxy: true,
-//     cookie:{
-//         secure: true
-//     }
-// }))
-
 app.use(session({
-    name: 'sessioasasn',
-    keys: [process.env.SESSION_SECRET],
-    domain: process.env.FRONTEND,
-    secure: true,
-
-  maxAge: 24 * 60 * 60 * 1000 
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    proxy: true,
+    cookie:{
+        secure: true
+    }
 }))
 
 app.use(passport.initialize())
@@ -55,44 +46,44 @@ app.use((req, res, next) =>{
 })
 
 
-const io = new Server(server, {
-    cors: {
-        origin: `${process.env.FRONTEND}`,
-        methods: ["GET", "POST"],
-    },
-    transports: ['websocket']
-})
+// const io = new Server(server, {
+//     cors: {
+//         origin: `${process.env.FRONTEND}`,
+//         methods: ["GET", "POST"],
+//     },
+//     transports: ['websocket']
+// })
 
 
-io.on("connection", (socket) =>{
-    console.log("User connect:", socket.id)
+// io.on("connection", (socket) =>{
+//     console.log("User connect:", socket.id)
 
-    socket.on("join_room", (data) =>{
-        socket.join(data)
-        console.log(`User with ID: ${socket.id} JOINED room: ${data}`)
-    })
+//     socket.on("join_room", (data) =>{
+//         socket.join(data)
+//         console.log(`User with ID: ${socket.id} JOINED room: ${data}`)
+//     })
 
-    socket.on("leave_room", (data) =>{
-        socket.leave(data)
-        console.log(`User with ID: ${socket.id} LEAVED room: ${data}`)
-    })
+//     socket.on("leave_room", (data) =>{
+//         socket.leave(data)
+//         console.log(`User with ID: ${socket.id} LEAVED room: ${data}`)
+//     })
 
-    socket.on("send_message", (data) =>{
-        console.log(data)
-        socket.to(data.roomId).emit("receive_message", data)
-    })
+//     socket.on("send_message", (data) =>{
+//         console.log(data)
+//         socket.to(data.roomId).emit("receive_message", data)
+//     })
 
-    socket.on("disconnect", ()=>{
-        console.log("User Disconnect: ", socket.id)
-        console.log("=================================")
-    })
-})
+//     socket.on("disconnect", ()=>{
+//         console.log("User Disconnect: ", socket.id)
+//         console.log("=================================")
+//     })
+// })
 
 
 app.use(router)
 
 PORT = process.env.PORT
 
-server.listen(PORT, error=>{
+app.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
