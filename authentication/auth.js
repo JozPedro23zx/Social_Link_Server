@@ -26,6 +26,7 @@ module.exports = function(passport){
 
 
     passport.serializeUser(function(user, done){
+        console.log(process.env.SESSION_SECRET)
         console.log('serialize', user.name)
         done(null, user.id_user)
     })
