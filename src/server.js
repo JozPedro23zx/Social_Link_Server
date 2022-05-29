@@ -4,7 +4,7 @@ const app = express()
 const router = require('./routers')
 const cookieParser = require("cookie-parser");
 const passport = require("passport")
-const session = require('client-sessions')
+const session = require('express-sessions')
 const cors = require('cors')
 const http = require('http')
 const server = http.createServer(app)
@@ -21,24 +21,17 @@ app.use(cors({
     credentials: true
 }))
 
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 app.use(cookieParser());
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     // resave: false,
-//     // saveUninitialized: true,
-//     // proxy: true,
-//     cookie:{
-//         secure: true,
-//         // maxAge:3600000
-//     }
-// }))
-
 app.use(session({
-  cookieName: 'mySession', // cookie name dictates the key name added to the request object
-  secret: process.env.SESSION_SECRET, // should be a large unguessable string
-  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
-  activeDuration: 1000 * 60 * 5 // 
+    secret: process.env.SESSION_SECRET,
+    // resave: false,
+    // saveUninitialized: true,
+    // proxy: true,
+    cookie:{
+        secure: false,
+        maxAge:3600000
+    }
 }))
 
 app.use(passport.initialize())
