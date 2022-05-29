@@ -25,13 +25,13 @@ app.set('trust proxy', 1)
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    proxy: true,
-    // cookie:{
-    //     secure: true,
-    //     maxAge:3600000
-    // }
+    // resave: false,
+    // saveUninitialized: true,
+    // proxy: true,
+    cookie:{
+        secure: true,
+        // maxAge:3600000
+    }
 }))
 
 app.use(passport.initialize())
