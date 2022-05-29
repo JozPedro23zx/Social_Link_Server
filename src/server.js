@@ -10,6 +10,7 @@ const http = require('http')
 const server = http.createServer(app)
 // const { Server } = require('socket.io')
 
+console.log("??")
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
