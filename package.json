@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "client-sessions": "^0.8.0",
     "connect-pg-simple": "^7.0.0",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
