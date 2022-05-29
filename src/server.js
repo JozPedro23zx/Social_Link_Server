@@ -23,15 +23,22 @@ app.use(cors({
 
 app.set('trust proxy', 1)
 app.use(cookieParser());
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     // resave: false,
+//     // saveUninitialized: true,
+//     // proxy: true,
+//     cookie:{
+//         secure: true,
+//         // maxAge:3600000
+//     }
+// }))
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    // resave: false,
-    // saveUninitialized: true,
-    // proxy: true,
-    cookie:{
-        secure: true,
-        // maxAge:3600000
-    }
+  cookieName: 'mySession', // cookie name dictates the key name added to the request object
+  secret: process.env.SESSION_SECRET, // should be a large unguessable string
+  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+  activeDuration: 1000 * 60 * 5 // 
 }))
 
 app.use(passport.initialize())
