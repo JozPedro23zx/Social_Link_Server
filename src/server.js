@@ -23,14 +23,23 @@ app.use(cors({
 
 app.set('trust proxy', 1)
 app.use(cookieParser());
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     proxy: true,
+//     cookie:{
+//         secure: true
+//     }
+// }))
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    proxy: true,
-    cookie:{
-        secure: true
-    }
+    name: 'sessioasasn',
+    keys: [process.env.SESSION_SECRET],
+    domain: process.env.FRONTEND,
+    secure: true,
+
+  maxAge: 24 * 60 * 60 * 1000 
 }))
 
 app.use(passport.initialize())
