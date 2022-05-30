@@ -20,16 +20,16 @@ app.use(cors({
     credentials: true
 }))
 
-// app.set('trust proxy', 1)
+app.set('trust proxy', 1)
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    // proxy: true,
-    // cookie:{
-    //     secure: true
-    // }
+    proxy: true,
+    cookie:{
+        secure: true
+    }
 }))
 
 app.use(passport.initialize())
