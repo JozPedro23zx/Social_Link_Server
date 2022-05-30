@@ -45,9 +45,13 @@ router.post('/login', (req, res, next) =>{
                     console.log(user.id_user)
                     res.send(["Success"])
                 })
+                // req.session.user = user
+                // console.log(req.session.user)
             }
         }
     )(req, res, next)
+
+
 })
 
 router.get('/logout', (req, res)=>{
@@ -56,6 +60,9 @@ router.get('/logout', (req, res)=>{
 })
 
 router.get('/user', (req, res, next) => {
+
+    console.log('session ', req.session)
+
     console.log(req.isAuthenticated())
     if(req.isAuthenticated()){
         res.status(200).send([req.user.id_user])
