@@ -40,35 +40,41 @@ router.post('/login', (req, res, next) =>{
             if(err) throw err
             else if(!user) res.send([info.message])
             else {
-                req.logIn(user, (err) => {
-                    if(err) throw err
-                    console.log(user.id_user)
-                    res.send(["Success"])
-                })
-                // req.session.user = user
-                // console.log(req.session.user)
+                // req.logIn(user, (err) => {
+                //     if(err) throw err
+                //     console.log(user.id_user)
+                //     res.send(["Success"])
+                // })
+                var session = req.session
+                session.user = user.id_user
+                res.send(["Success"])
             }
         }
     )(req, res, next)
-
-
 })
 
 router.get('/logout', (req, res)=>{
-    req.logout()
+    // req.logout()
+    req.session.destroy()
     res.redirect(process.env.FRONTEND)
 })
 
 router.get('/user', (req, res, next) => {
 
-    console.log('session ', req.session)
+    console.log("Outra coisa")
+    console.log('session ', req.session.user)
 
-    console.log(req.isAuthenticated())
-    if(req.isAuthenticated()){
-        res.status(200).send([req.user.id_user])
+    if(req.session.user){
+        res.status(200).send([req.session.user])
     }else{
         res.send(null)
     }
+
+    // if(req.isAuthenticated()){
+    //     res.status(200).send([req.session.user])
+    // }else{
+    //     res.send(null)
+    // }
 })
 
 module.exports = router
