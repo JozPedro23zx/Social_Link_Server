@@ -27,9 +27,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     proxy: true,
-    cookie:{
-        secure: true
-    }
+    // cookie:{
+    //     secure: true
+    // }
 }))
 
 app.use(passport.initialize())
