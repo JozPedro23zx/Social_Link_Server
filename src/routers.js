@@ -22,6 +22,7 @@ router.get('/getComments/:postId', CommentsController.getComments)
 router.post('/createComment', CommentsController.createComment)
 
 
+router.post('/login', UserController.loginUser)
 router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)
 router.post('/registerUser', UserController.registerUser)
@@ -34,24 +35,25 @@ router.get('/getAllRooms', ChatController.getAllRooms)
 router.post('/createRoom', ChatController.createRoom)
 
 
-router.post('/login', (req, res, next) =>{
-    passport.authenticate('local',
-        (err, user, info)=>{
-            if(err) throw err
-            else if(!user) res.send([info.message])
-            else {
-                // req.logIn(user, (err) => {
-                //     if(err) throw err
-                //     console.log(user.id_user)
-                //     res.send(["Success"])
-                // })
-                var session = req.session
-                session.user = user.id_user
-                res.send(["Success"])
-            }
-        }
-    )(req, res, next)
-})
+
+// (req, res, next) =>{
+//     passport.authenticate('local',
+//         (err, user, info)=>{
+//             if(err) throw err
+//             else if(!user) res.send([info.message])
+//             else {
+//                 // req.logIn(user, (err) => {
+//                 //     if(err) throw err
+//                 //     console.log(user.id_user)
+//                 //     res.send(["Success"])
+//                 // })
+//                 var session = req.session
+//                 session.user = user.id_user
+//                 res.send(["Success"])
+//             }
+//         }
+//     )(req, res, next)
+// }
 
 router.get('/logout', (req, res)=>{
     // req.logout()
