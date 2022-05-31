@@ -32,24 +32,20 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     // proxy: true,
-    cookie: {
-        path: "/",
-        secure: false,
-        httpOnly: true
-    }
+    cookie: {secure: false}
 }));
 
 // app.use(passport.initialize());
 // app.use(passport.session());
 // require('../authentication/auth')(passport);
 
-app.use((req, res, next) =>{
-  res.header('Access-Control-Allow-Origin', process.env.FRONTEND)
-  res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept")
-  res.header('Access-Control-Allow-Credentials', true)
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  next()
-});
+// app.use((req, res, next) =>{
+//   res.header('Access-Control-Allow-Origin', process.env.FRONTEND)
+//   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept")
+//   res.header('Access-Control-Allow-Credentials', true)
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+//   next()
+// });
 
 
 const io = new Server(server, {
