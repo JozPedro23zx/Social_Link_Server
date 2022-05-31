@@ -85,6 +85,7 @@ app.use(router)
 
 PORT = process.env.PORT
 
+console.log(PORT)
 server.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
 })
