@@ -1,26 +1,31 @@
-require('dotenv/config')
-const express = require('express')
-const app = express()
-const router = require('./routers')
+require('dotenv/config');
+const express = require('express');
+const app = express();
+const router = require('./routers');
 const cookieParser = require("cookie-parser");
-const passport = require("passport")
-const session = require('express-session')
-const cors = require('cors')
-const http = require('http')
-const server = http.createServer(app)
-const { Server } = require('socket.io')
+const passport = require("passport");
+const session = require('express-session');
+const cors = require('cors');
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+
+console.log('ENV Frontend url', process.env.FRONTEND)
+console.log('ENV Database url', process.env.DATABASE_LOCAL)
+console.log('ENV PORT', process.env.PORT)
+console.log('ENV session secret', process.env.SESSION_SECRET)
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
 
+app.set('trust proxy', 1);
 
 app.use(cors({
     "origin": process.env.FRONTEND,
     "methods": "GET,HEAD,POST",
     credentials: true
-}))
+}));
 
-app.set('trust proxy', 1)
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -29,14 +34,14 @@ app.use(session({
     // proxy: true,
     cookie: {
         path: "/",
-        secure: true,
+        secure: false,
         httpOnly: true
     }
-}))
+}));
 
-app.use(passport.initialize())
-app.use(passport.session())
-require('../authentication/auth')(passport)
+// app.use(passport.initialize());
+// app.use(passport.session());
+// require('../authentication/auth')(passport);
 
 app.use((req, res, next) =>{
   res.header('Access-Control-Allow-Origin', process.env.FRONTEND)
@@ -44,7 +49,7 @@ app.use((req, res, next) =>{
   res.header('Access-Control-Allow-Credentials', true)
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
   next()
-})
+});
 
 
 const io = new Server(server, {
@@ -53,7 +58,7 @@ const io = new Server(server, {
         methods: ["GET", "POST"],
     },
     transports: ['websocket']
-})
+});
 
 
 io.on("connection", (socket) =>{
@@ -78,14 +83,14 @@ io.on("connection", (socket) =>{
         console.log("User Disconnect: ", socket.id)
         console.log("=================================")
     })
-})
+});
 
 
-app.use(router)
+app.use(router);
 
-PORT = process.env.PORT
+PORT = process.env.PORT;
 
-console.log(PORT)
+console.log(PORT);
 server.listen(PORT, error=>{
     error ? console.log(error) : console.log(`Api server running in port ${PORT}`)
-})
+});
