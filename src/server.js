@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 
 console.log('ENV Frontend url', process.env.FRONTEND)
-console.log('ENV Database url', process.env.DATABASE_LOCAL)
+console.log('ENV Database url', process.env.DATABASE_LOCAL || process.env.DATABASE_URL)
 console.log('ENV PORT', process.env.PORT)
 console.log('ENV session secret', process.env.SESSION_SECRET)
 
