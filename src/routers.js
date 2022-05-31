@@ -62,9 +62,8 @@ router.get('/logout', (req, res)=>{
 })
 
 router.get('/user', (req, res, next) => {
-
-    console.log("Outra coisa")
-    console.log('session ', req.session.user)
+    console.log('cookies', req.cookies)
+    console.log('user id', req.session.user)
 
     if(req.session.user){
         res.status(200).send([req.session.user])
