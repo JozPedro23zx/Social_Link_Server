@@ -21,7 +21,7 @@ class UserController{
 
     async changeUserData(req, res){
         const {username, password, passwordConfirm, avatarId} = req.body
-        const userId = req.user ? req.session.user : 0
+        const userId = req.user ? req.user.id_user : 0
         var message
         try{
             var user = await User.findByPk(userId)
@@ -45,29 +45,29 @@ class UserController{
         }
     }
     
-    async loginUser(req, res){
-        const {username, password} = req.body
-        var message = ''
-        console.log(username, password)
+    // async loginUser(req, res){
+    //     const {username, password} = req.body
+    //     var message = ''
+    //     console.log(username, password)
 
-        var data = await User.findOne({where: {name: username}})
+    //     var data = await User.findOne({where: {name: username}})
 
-        if(username === '' || password === ''){
-            message = "Enter With username & password"
-        }
-        else if(!data){
-            message = "User not registered"
-        }else{
-            var isValid = bcrypt.compareSync(password, data.password)
-            if(!isValid) message = "The password is incorrect"
-            else{
-                var session = req.session
-                session.user = data.id_user
-                message = 'Success'
-            }
-        }
-        res.send([message])
-    }
+    //     if(username === '' || password === ''){
+    //         message = "Enter With username & password"
+    //     }
+    //     else if(!data){
+    //         message = "User not registered"
+    //     }else{
+    //         var isValid = bcrypt.compareSync(password, data.password)
+    //         if(!isValid) message = "The password is incorrect"
+    //         else{
+    //             var session = req.session
+    //             session.user = data.id_user
+    //             message = 'Success'
+    //         }
+    //     }
+    //     res.send([message])
+    // }
 
     async registerUser(req, res){
         const {username, password, passwordRepeat} = req.body

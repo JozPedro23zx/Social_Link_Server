@@ -32,12 +32,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     // proxy: true,
-    cookie: {secure: true}
+    cookie: {secure: false}
 }));
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// require('../authentication/auth')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+require('../authentication/auth')(passport);
 
 // app.use((req, res, next) =>{
 //   res.header('Access-Control-Allow-Origin', process.env.FRONTEND)

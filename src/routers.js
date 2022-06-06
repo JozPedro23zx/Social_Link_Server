@@ -22,7 +22,7 @@ router.get('/getComments/:postId', CommentsController.getComments)
 router.post('/createComment', CommentsController.createComment)
 
 
-router.post('/login', UserController.loginUser)
+// router.post('/login', UserController.loginUser)
 router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)
 router.post('/registerUser', UserController.registerUser)
@@ -35,47 +35,45 @@ router.get('/getAllRooms', ChatController.getAllRooms)
 router.post('/createRoom', ChatController.createRoom)
 
 
+router.post('/login', (req, res, next) =>{
+    passport.authenticate('local',
+        (err, user, info)=>{
+            if(err) throw err
+            else if(!user) res.send([info.message])
+            else {
+                req.logIn(user, (err) => {
+                    if(err) throw err
+                    console.log(user.id_user)
+                    res.send(["Success"])
+                })
+            }
+        }
+    )(req, res, next)
+})
 
-// (req, res, next) =>{
-//     passport.authenticate('local',
-//         (err, user, info)=>{
-//             if(err) throw err
-//             else if(!user) res.send([info.message])
-//             else {
-//                 // req.logIn(user, (err) => {
-//                 //     if(err) throw err
-//                 //     console.log(user.id_user)
-//                 //     res.send(["Success"])
-//                 // })
-//                 var session = req.session
-//                 session.user = user.id_user
-//                 res.send(["Success"])
-//             }
-//         }
-//     )(req, res, next)
-// }
+
 
 router.get('/logout', (req, res)=>{
-    // req.logout()
-    req.session.destroy()
+    req.logout()
+    // req.session.destroy()
     res.redirect(process.env.FRONTEND)
 })
 
 router.get('/user', (req, res, next) => {
     console.log('cookies', req.cookies)
-    console.log('user id', req.session)
+    console.log('session', req.session)
 
-    if(req.session.user){
-        res.status(200).send([req.session.user])
-    }else{
-        res.send(null)
-    }
-
-    // if(req.isAuthenticated()){
+    // if(req.session.user){
     //     res.status(200).send([req.session.user])
     // }else{
     //     res.send(null)
     // }
+
+    if(req.isAuthenticated()){
+        res.status(200).send([req.user.id_user])
+    }else{
+        res.send(null)
+    }
 })
 
 module.exports = router

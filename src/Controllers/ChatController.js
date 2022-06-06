@@ -9,7 +9,7 @@ class ChatController{
             const data = await Rooms.findAll({
                 where:{
                     users:{
-                        [Op.contains]: [req.session.user]
+                        [Op.contains]: [req.user.id_user]
                     }
                 }
             })
