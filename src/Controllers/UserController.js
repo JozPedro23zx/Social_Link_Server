@@ -22,7 +22,7 @@ class UserController{
 
     async changeUserData(req, res){
         const {username, password, passwordConfirm, avatarId} = req.body
-        const userId = req.user ? req.user.id_user : 0
+        const userId = req.body.idUser || 0
         var message
         try{
             var user = await User.findByPk(userId)

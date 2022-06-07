@@ -32,30 +32,11 @@ router.post('/changeUserData', UserController.changeUserData)
 
 router.get('/getMessage/:roomId', ChatController.getMessage)
 router.post('/sendMessage', ChatController.sendMessage)
-router.get('/getAllRooms', ChatController.getAllRooms)
+router.post('/getAllRooms', ChatController.getAllRooms)
 router.post('/createRoom', ChatController.createRoom)
 
-
-// router.post('/login', (req, res, next) =>{
-//     passport.authenticate('local',
-//         (err, user, info)=>{
-//             if(err) throw err
-//             else if(!user) res.send([info.message])
-//             else {
-//                 req.logIn(user, (err) => {
-//                     if(err) throw err
-//                     console.log(user.id_user)
-//                     res.send(["Success"])
-//                 })
-//             }
-//         }
-//     )(req, res, next)
-// })
-
-
-
 router.get('/logout', (req, res)=>{
-    
+    //
     res.redirect(process.env.FRONTEND)
 })
 
@@ -69,18 +50,6 @@ router.post('/user', (req, res, next) => {
     }else{
         res.send(null)
     }
-
-    // if(req.session.user){
-    //     res.status(200).send([req.session.user])
-    // }else{
-    //     res.send(null)
-    // }
-
-    // if(req.isAuthenticated()){
-    //     res.status(200).send([req.user.id_user])
-    // }else{
-    //     res.send(null)
-    // }
 })
 
 module.exports = router
