@@ -1,5 +1,6 @@
 const User = require('../../database/Models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 class UserController{
     async getUser(req, res){
@@ -45,29 +46,30 @@ class UserController{
         }
     }
     
-    // async loginUser(req, res){
-    //     const {username, password} = req.body
-    //     var message = ''
-    //     console.log(username, password)
+    async loginUser(req, res){
+        const {username, password} = req.body
+        var message = ''
+        console.log(username, password)
 
-    //     var data = await User.findOne({where: {name: username}})
+        var user = await User.findOne({where: {name: username}})
 
-    //     if(username === '' || password === ''){
-    //         message = "Enter With username & password"
-    //     }
-    //     else if(!data){
-    //         message = "User not registered"
-    //     }else{
-    //         var isValid = bcrypt.compareSync(password, data.password)
-    //         if(!isValid) message = "The password is incorrect"
-    //         else{
-    //             var session = req.session
-    //             session.user = data.id_user
-    //             message = 'Success'
-    //         }
-    //     }
-    //     res.send([message])
-    // }
+        if(username === '' || password === ''){
+            message = "Enter With username & password"
+        }
+        else if(!user){
+            message = "User not registered"
+        }else{
+            var isValid = bcrypt.compareSync(password, user.password)
+            if(!isValid) message = "The password is incorrect"
+            else{
+                var token = jwt.sign({id: user.id_user}, process.env.SESSION_SECRET)
+                message = "Success"
+            }
+        }
+        res.send({message, token})
+    }
+
+
 
     async registerUser(req, res){
         const {username, password, passwordRepeat} = req.body
