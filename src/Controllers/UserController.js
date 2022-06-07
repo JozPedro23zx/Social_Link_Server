@@ -62,7 +62,7 @@ class UserController{
             var isValid = bcrypt.compareSync(password, user.password)
             if(!isValid) message = "The password is incorrect"
             else{
-                var token = jwt.sign({id: user.id_user}, process.env.SESSION_SECRET)
+                var token = jwt.sign({id: user.id_user}, process.env.SESSION_SECRET, {expiresIn: '1d'})
                 message = "Success"
             }
         }
