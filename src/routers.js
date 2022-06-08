@@ -42,14 +42,8 @@ router.get('/logout', (req, res)=>{
 
 router.post('/user', (req, res, next) => {
     var token = req.body.token
-    var decoded = token ? jwt.verify(token, process.env.SESSION_SECRET) : null
-    console.log('token', decoded)
-
-    if(decoded){
-        res.send([decoded.id])
-    }else{
-        res.send(null)
-    }
+    var decoded = token ? jwt.verify(token, process.env.SESSION_SECRET).id : null
+    res.send([decoded])
 })
 
 module.exports = router

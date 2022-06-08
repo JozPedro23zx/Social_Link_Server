@@ -24,7 +24,6 @@ class LikeListController{
         const likesData = await LikeList.findOne({where: {id_user: idUser}})
         const postData = await Posts.findOne({where: {id_post: postId}})
         var likesCount = []
-
         if(likesData === null){
             let newLikeList = await LikeList.create({
                 id_user: idUser,
@@ -39,7 +38,7 @@ class LikeListController{
                 likesData.update({likes: [...likesData.likes, postId]})
             }
             else if(isLike == true){
-                await postData.decrement('likes')
+                postData.likes === 0 ? 0 : await postData.decrement('likes')
                 let newListLikes = likesData.likes.filter(element => element !== postId)
                 likesData.update({likes: [...newListLikes]})
             }
