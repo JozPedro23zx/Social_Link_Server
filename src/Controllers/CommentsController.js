@@ -3,7 +3,7 @@ const Comments = require('../../database/Models/Comments')
 class CommentsController{
     async getComments(req, res){
         try{
-            var data = await Comments.findAll({where: {id_post: req.params.postId}})
+            var data = await Comments.findAll({where: {id_post: req.params.postId}, order: [['createdAt', 'DESC']]})
             res.status(200).send(data)
         }catch(err){
             console.log(err)
