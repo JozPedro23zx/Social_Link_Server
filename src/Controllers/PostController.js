@@ -28,7 +28,7 @@ class PostControllers{
 
     async getPostOfUser(req, res){
         try{
-            var data = await Posts.findAll({where: {id_user: req.params.userId}})
+            var data = await Posts.findAll({where: {id_user: req.params.userId}, order:[['createdAt', 'DESC']]})
             res.status(200).send({data})
         }catch(error){
             console.log(error)
