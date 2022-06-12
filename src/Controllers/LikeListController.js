@@ -15,7 +15,6 @@ class LikeListController{
 
     async changeLikeList(req, res){
         const {idUser, postId, isLike} = req.body
-        console.log(isLike)
     try{
         const likesData = await LikeList.findOne({where: {id_user: idUser}})
         const postData = await Posts.findOne({where: {id_post: postId}})
@@ -31,7 +30,6 @@ class LikeListController{
         else{
 
             if(isLike == false){
-                console.log("Tá incrementando")
                 await postData.increment('likes')
                 likesData.update({likes: [...likesData.likes, postId]})
             }

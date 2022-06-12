@@ -49,7 +49,6 @@ class UserController{
     async loginUser(req, res){
         const {username, password} = req.body
         var message = ''
-        console.log(username, password)
 
         var user = await User.findOne({where: {name: username}})
 
