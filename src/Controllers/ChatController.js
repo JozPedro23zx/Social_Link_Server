@@ -65,7 +65,7 @@ class ChatController{
                             roomId: message.id_room,
                             userId: message.id_user, 
                             message: message.message, 
-                            time: message.date
+                            time: message.createdAt
                         })
                     })
                 }
