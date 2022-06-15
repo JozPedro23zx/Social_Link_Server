@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const router = require('./routers');
 const cookieParser = require("cookie-parser");
-const passport = require("passport");
 const session = require('express-session');
 const cors = require('cors');
 const http = require('http');
@@ -26,13 +25,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    // proxy: true,
-    cookie: {secure: false}
 }));
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-// require('../authentication/auth')(passport);
 
 app.use((req, res, next) =>{
   res.header('Access-Control-Allow-Origin', process.env.FRONTEND)
