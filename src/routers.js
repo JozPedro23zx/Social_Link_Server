@@ -1,7 +1,6 @@
 router = require('express').Router()
 const jwt = require('jsonwebtoken')
 require('dotenv/config')
-const passport = require('passport');
 
 const CommentsController = require('./Controllers/CommentsController')
 const LikeListController = require('./Controllers/LikeListController')
