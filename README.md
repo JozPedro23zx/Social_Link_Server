@@ -1,10 +1,10 @@
 # Social_Link_Server
-Create .env file with the following variables:
+<h2>Create .env file with the following variables:</h2>
 
-DATABASE_URL (if you are going to use SSL) or DATABASE_LOCAL (if you don't);
-FRONTEND (client url);
-PORT;
-SESSION_SECRET;
+<P>DATABASE_URL (if you are going to use SSL) or DATABASE_LOCAL (if you don't);</P>
+<P>FRONTEND (client url);</P>
+<P>PORT;</P>
+<P>SESSION_SECRET;</P>
 
 
-Use the command "node src/server.js" to running API
+<h2>Use the command "node src/server.js" to running API</h2>
