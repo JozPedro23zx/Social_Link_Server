@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: pgtest
+      POSTGRES_PASSWORD: 123root
+      POSTGRES_DB: dbtest
+    ports:
+      - '3001:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://pgtest:123root@db:5432/dbtest
+
+volumes:
+  db-data:
