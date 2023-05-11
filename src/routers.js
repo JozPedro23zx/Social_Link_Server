@@ -27,6 +27,7 @@ router.get('/getUser/:userId', UserController.getUser)
 router.get('/getUserByName/:userId', UserController.getUserByName)
 router.post('/registerUser', UserController.registerUser)
 router.post('/changeUserData', UserController.changeUserData)
+router.get('/getMessageBox/:userId', UserController.getMessageBox)
 
 
 router.get('/getMessage/:roomId', ChatController.getMessage)
