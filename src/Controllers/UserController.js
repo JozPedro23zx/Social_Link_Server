@@ -1,3 +1,4 @@
+const MessageBoxService = require('../Services/MessageBoxService')
 const UserService = require('../Services/UserService')
 
 class UserController{
@@ -46,6 +47,16 @@ class UserController{
         try{
             const data = await UserService.registerUser(username, password, passwordRepeat)
     
+            res.status(200).send(data)
+        }catch(err){
+            res.status(400).send(err)
+        }
+    }
+
+    async getMessageBox(req, res){
+        const {userId} = req.params
+        try{
+            const data = await MessageBoxService.GetMessages(userId)
             res.status(200).send(data)
         }catch(err){
             res.status(400).send(err)

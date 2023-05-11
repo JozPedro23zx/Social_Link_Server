@@ -1,4 +1,5 @@
 const Comments = require('../../database/Models/Comments')
+const MessageBoxService = require('../Services/MessageBoxService')
 const PostService = require('../Services/PostService')
 
 class CommentsController{
@@ -15,6 +16,7 @@ class CommentsController{
         const {content, idUser, idPost} = req.body
         try{
             if(content) PostService.createComment(idPost, idUser, content)
+            MessageBoxService.SendMessage("comment", idPost, idUser)
             res.send("Post created")
         }catch(err){
             console.log(er)
