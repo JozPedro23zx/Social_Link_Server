@@ -3,7 +3,7 @@ const PostService = require("../Services/PostService")
 class PostControllers{
     async getPost(req, res){
         try{
-            var data = await PostService(req.params.postId)
+            var data = await PostService.getPost(req.params.postId)
             res.status(200).send(data)
         }catch(error){
             console.log(error)
