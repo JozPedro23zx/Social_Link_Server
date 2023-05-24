@@ -8,6 +8,7 @@ const cors = require('cors');
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require('socket.io');
+const MessageBoxService = require('./Services/MessageBoxService');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -45,8 +46,33 @@ const io = new Server(server, {
 });
 
 
-io.on("connection", (socket) =>{
+io.on("connection", async (socket) =>{
     console.log("User connect:", socket.id)
+
+    // socket.data.username = "123h"
+    // const sockets = await io.fetchSockets()
+    
+    // user = sockets.find((userSocket)=>{return userSocket.data.username === '123h'})
+    // console.log("User connect:", user.id)
+
+    socket.on("set_user_id", async (data) =>{
+        socket.data.userId = data[0]
+        console.log('User id:',socket.data.userId)
+    })
+
+    socket.on("send_notification", async ({idRecipient, idSender, type})=>{
+        const sockets = await io.fetchSockets()
+        const userSocket = sockets.find((user)=>{return user.data.userId === idRecipient})
+        
+        if(userSocket){
+            io.to(userSocket.id).emit("get_notification", {
+                idSender,
+                type
+            })
+        }
+        MessageBoxService.SendMessage(type, idRecipient, idSender)
+
+    })
 
     socket.on("join_room", (data) =>{
         socket.join(data)
