@@ -1,10 +1,9 @@
-const Posts = require('../../database/Models/Posts')
-const { Op } = require('sequelize')
+const PostService = require("../Services/PostService")
 
 class PostControllers{
     async getPost(req, res){
         try{
-            var data = await Posts.findByPk(req.params.postId)
+            var data = await PostService.getPost(req.params.postId)
             res.status(200).send(data)
         }catch(error){
             console.log(error)
@@ -14,12 +13,7 @@ class PostControllers{
     async getAllPost(req, res){
         const {allIdPosts, search} = req.body
         try{
-            var data
-            if(search === "empty"){
-                data = await Posts.findAll({where:{[Op.not]: {id_post: allIdPosts}}, order: [['updatedAt', 'DESC']], limit: 8 })
-            }else{
-                data = await Posts.findAll({where: {content:{[Op.like]: `%${search}%`}}})
-            }
+            const data = await PostService.getAllPost(allIdPosts, search)
             res.status(200).send(data)
         }catch(error){
             console.log(error)
@@ -28,7 +22,7 @@ class PostControllers{
 
     async getPostOfUser(req, res){
         try{
-            var data = await Posts.findAll({where: {id_user: req.params.userId}, order:[['createdAt', 'DESC']]})
+            var data = await PostService.getPostsOfUser(req.params.userId)
             res.status(200).send({data})
         }catch(error){
             console.log(error)
@@ -42,13 +36,7 @@ class PostControllers{
         var date = new Date()
         var currentDate = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
         try{
-            Posts.create({
-                id_user: idUser,
-                date: currentDate,
-                likes: 0,
-                content: contentPost,
-                image: idImage === '' ? idImage : `https://res.cloudinary.com/dhuy2dkhc/image/upload/v1651159775/${idImage}`
-            })
+            await PostService.createPost(contentPost, idImage, idUser, currentDate)
             res.send("Post created")
         }catch(error){
             console.log(error)

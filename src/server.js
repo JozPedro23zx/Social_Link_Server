@@ -7,7 +7,7 @@ const session = require('express-session');
 const cors = require('cors');
 const http = require('http');
 const server = http.createServer(app);
-const { Server } = require('socket.io');
+const socketHandler = require('./socket-events')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -36,38 +36,7 @@ app.use((req, res, next) =>{
 });
 
 
-const io = new Server(server, {
-    cors: {
-        origin: `${process.env.FRONTEND}`,
-        methods: ["GET", "POST"],
-    },
-    transports: ['websocket']
-});
-
-
-io.on("connection", (socket) =>{
-    console.log("User connect:", socket.id)
-
-    socket.on("join_room", (data) =>{
-        socket.join(data)
-        console.log(`User with ID: ${socket.id} JOINED room: ${data}`)
-    })
-
-    socket.on("leave_room", (data) =>{
-        socket.leave(data)
-        console.log(`User with ID: ${socket.id} LEAVED room: ${data}`)
-    })
-
-    socket.on("send_message", (data) =>{
-        socket.to(data.roomId).emit("receive_message", data)
-    })
-
-    socket.on("disconnect", ()=>{
-        console.log("User Disconnect: ", socket.id)
-        console.log("=================================")
-    })
-});
-
+socketHandler(server)
 
 app.use(router);
 

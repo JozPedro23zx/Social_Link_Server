@@ -1,32 +1,15 @@
 require('dotenv/config')
 const Sequelize = require('sequelize')
 
-var sequelize
-var notice
-
-if(process.env.DATABASE_URL){
-  notice = "connected to the HEROKU server"
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-      dialect: 'postgres',
-      dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-      }
-  })
-}
-else{
-  notice = "connected to the LOCAL server"
-  sequelize = new Sequelize(process.env.DATABASE_LOCAL, {
-    dialect: 'postgres'
-})
-}
+const sequelize = new Sequelize(process.env.DATABASE_URL, {dialect: 'postgres'})
 
 
 sequelize.authenticate().then(() => {
-    console.log(notice);
+    console.log("Connection with database is success");
   }).catch((err) => {
     console.log(err);
   });
+
+sequelize.sync()
+
 module.exports = sequelize
