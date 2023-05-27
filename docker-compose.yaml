@@ -21,6 +21,8 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://pgtest:123root@db:5432/dbtest
+    volumes:
+      - .:/app/server
 
 volumes:
   db-data:

@@ -1,3 +1,4 @@
+const MessageBoxService = require('../Services/MessageBoxService')
 const UserService = require('../Services/UserService')
 
 class UserController{
@@ -24,7 +25,7 @@ class UserController{
         try{
             const data = await UserService.changeUserData(userId, username, password, passwordConfirm, avatarId)
             
-            res.send(message)
+            res.send(data)
 
         }catch(err){
             console.log(err)
@@ -47,6 +48,27 @@ class UserController{
             const data = await UserService.registerUser(username, password, passwordRepeat)
     
             res.status(200).send(data)
+        }catch(err){
+            res.status(400).send(err)
+        }
+    }
+
+    async getMessageBox(req, res){
+        const {userId} = req.params
+        try{
+            const data = await MessageBoxService.GetMessages(userId)
+            res.status(200).send(data)
+        }catch(err){
+            res.status(400).send(err)
+        }
+    }
+
+    async deleteMessageBox(req, res){
+        const {idSender, typeMessage} = req.body
+        console.log(typeMessage)
+        try{
+            await MessageBoxService.DeleteMessage(idSender, typeMessage)
+            res.status(200)
         }catch(err){
             res.status(400).send(err)
         }

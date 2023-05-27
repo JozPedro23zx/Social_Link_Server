@@ -1,5 +1,6 @@
 const Posts = require('../../database/Models/Posts')
 const Comments = require('../../database/Models/Comments')
+const LikeList = require('../../database/Models/LikeList')
 const { Op } = require('sequelize')
 
 class PostService{
@@ -48,11 +49,9 @@ class PostService{
 
     async getLikeList(userId){
         var data = await LikeList.findOne({where: {id_user: userId}})
-        var likes = []
-        if(data) likes = data.likes
-        return likes
+        return data
     }
-
+    
     async changeLikeList(idUser, postId, isLike){
         const likesData = await LikeList.findOne({where: {id_user: idUser}})
         const postData = await Posts.findOne({where: {id_post: postId}})

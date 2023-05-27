@@ -1,4 +1,3 @@
-const Comments = require('../../database/Models/Comments')
 const PostService = require('../Services/PostService')
 
 class CommentsController{
